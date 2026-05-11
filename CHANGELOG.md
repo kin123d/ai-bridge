@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+- **VSCode Auto Setup (`ai-bridge vscode init`)**: Automatically injects `"ollama.baseUrl"` into `.vscode/settings.json`.
+- **Health Diagnostics (`ai-bridge doctor`)**: Instantly verifies Apple Silicon (MLX), Ollama status, and Reverse Tunnel connectivity.
+- **Official Agent Templates**: Included `.clinerules` for Roo Code, `cline_mcp_settings.json` for Cline, and `config.json` for Continue.dev to explicitly leverage `localhost:11434`.
+- **Distributed MCP Architecture**: Added `install/docker-compose/distributed-mcp.yml` to define isolated containers for Vector Memory (Qdrant), MCP Gateway, and Workspace.
+- **Korean README**: Added `README.ko.md` for Korean developers.
+
 ## [0.2.0] - 2026-05-11
 
 ### Added

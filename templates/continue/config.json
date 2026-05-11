@@ -1,0 +1,29 @@
+{
+  "models": [
+    {
+      "title": "Qwen2.5-Coder (ai-bridge)",
+      "provider": "ollama",
+      "model": "qwen2.5-coder:latest",
+      "apiBase": "http://localhost:11434"
+    },
+    {
+      "title": "DeepSeek-Coder (ai-bridge)",
+      "provider": "ollama",
+      "model": "deepseek-coder:latest",
+      "apiBase": "http://localhost:11434"
+    }
+  ],
+  "tabAutocompleteModel": {
+    "title": "Qwen2.5-Coder 1.5B (ai-bridge)",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:1.5b",
+    "apiBase": "http://localhost:11434"
+  },
+  "customCommands": [
+    {
+      "name": "check-bridge",
+      "prompt": "Run ./ai-bridge doctor to verify the connection between the MacBook inference engine and this workspace.",
+      "description": "Check ai-bridge status"
+    }
+  ]
+}

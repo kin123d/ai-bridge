@@ -1,0 +1,48 @@
+version: '3.8'
+
+# ai-bridge: Distributed MCP Architecture (v1.0)
+# This configuration demonstrates the locality separation principle:
+# - MacBook (Host): Inference Engine (Ollama/MLX)
+# - Linux A (workspace): Code execution and editing
+# - Linux B (mcp-gateway): Tools and context provider
+# - Linux C (vector-memory): Embedding and RAG memory
+
+services:
+  # 1. Vector Memory Database (Linux C)
+  vector-memory:
+    image: qdrant/qdrant:latest
+    container_name: ai-vector-memory
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - qdrant_data:/qdrant/storage
+    restart: unless-stopped
+
+  # 2. MCP Gateway (Linux B)
+  mcp-gateway:
+    image: node:20-alpine
+    container_name: ai-mcp-gateway
+    working_dir: /mcp
+    command: >
+      sh -c "npm install -g @modelcontextprotocol/server-everything && 
+             npx @modelcontextprotocol/server-everything"
+    depends_on:
+      - vector-memory
+    environment:
+      - QDRANT_URL=http://vector-memory:6333
+    restart: unless-stopped
+
+  # 3. Workspace / Runtime (Linux A)
+  workspace:
+    image: ubuntu:22.04
+    container_name: ai-workspace
+    volumes:
+      - ../../:/workspace
+    working_dir: /workspace
+    command: tail -f /dev/null
+    depends_on:
+      - mcp-gateway
+
+volumes:
+  qdrant_data:

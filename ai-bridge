@@ -24,8 +24,22 @@ case "$1" in
         pkill -f "ssh -N -R" || true
         echo "✅ ai-bridge stopped."
         ;;
+    vscode)
+        if [[ -x "${SCRIPT_DIR}/scripts/vscode-init.sh" ]]; then
+            "${SCRIPT_DIR}/scripts/vscode-init.sh" "$2"
+        else
+            echo "❌ vscode-init script not found."
+        fi
+        ;;
+    doctor)
+        if [[ -x "${SCRIPT_DIR}/scripts/doctor.sh" ]]; then
+            "${SCRIPT_DIR}/scripts/doctor.sh"
+        else
+            echo "❌ doctor script not found."
+        fi
+        ;;
     *)
-        echo "Usage: ./ai-bridge {up|status|stop}"
+        echo "Usage: ./ai-bridge {up|status|stop|vscode|doctor}"
         exit 1
         ;;
 esac
