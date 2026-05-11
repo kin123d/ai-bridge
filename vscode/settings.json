@@ -1,0 +1,25 @@
+{
+  "// ai-bridge VSCode 추천 설정": "",
+  "remote.SSH.defaultExtensions": [
+    "continue.continue",
+    "rooveterinaryinc.roo-cline"
+  ],
+  "remote.SSH.connectTimeout": 30,
+  "remote.SSH.enableAgentForwarding": true,
+  
+  "// Ollama 연결 (터널링된 로컬 포트)": "",
+  "continue.models": [
+    {
+      "title": "AI Bridge - Qwen (MacBook)",
+      "provider": "ollama",
+      "model": "qwen3:8b",
+      "apiBase": "http://localhost:11434"
+    },
+    {
+      "title": "AI Bridge - DeepSeek (MacBook)",
+      "provider": "ollama",
+      "model": "deepseek-coder-v2",
+      "apiBase": "http://localhost:11434"
+    }
+  ]
+}

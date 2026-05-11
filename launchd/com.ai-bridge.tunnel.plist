@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.ai-bridge.tunnel</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>-c</string>
+        <!-- ai-bridge 클론 경로에 맞게 수정하세요 -->
+        <string>$HOME/ai-bridge/bridge/reconnect.sh</string>
+    </array>
+
+    <!-- 로그인 시 자동 시작 -->
+    <key>RunAtLoad</key>
+    <true/>
+
+    <!-- 실패 시 30초 후 재시도 -->
+    <key>KeepAlive</key>
+    <true/>
+    <key>ThrottleInterval</key>
+    <integer>30</integer>
+
+    <!-- 로그 -->
+    <key>StandardOutPath</key>
+    <string>/tmp/ai-bridge-tunnel.stdout.log</string>
+    <key>StandardErrorPath</key>
+    <string>/tmp/ai-bridge-tunnel.stderr.log</string>
+</dict>
+</plist>

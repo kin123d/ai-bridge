@@ -1,0 +1,14 @@
+# ai-bridge SSH 설정 템플릿
+# ~/.ssh/config에 추가하세요
+
+Host ai-bridge-dev
+    HostName {{BRIDGE_HOST}}
+    User {{BRIDGE_USER}}
+    Port {{BRIDGE_PORT}}
+    IdentityFile ~/.ssh/ai-bridge
+    ForwardAgent yes
+    ServerAliveInterval 30
+    ServerAliveCountMax 3
+    # 필요 시 추가 포트 포워딩
+    # LocalForward 3190:localhost:3190
+    # LocalForward 8080:localhost:8080
