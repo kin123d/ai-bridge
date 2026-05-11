@@ -33,7 +33,7 @@ Linux    = Workspace    (코드/실행 전용)
 │    MacBook           │
 │                      │
 │  • Ollama Server      │
-│  • Qwen / DeepSeek    │
+│  • Your Local Models  │
 │  • AI Inference       │
 └─────────┬──────────┘
           │ SSH Reverse Tunnel
@@ -102,7 +102,7 @@ chmod +x install/ubuntu-setup.sh
     "tunnel_process": "ok",
     "remote_ollama": "ok"
   },
-  "models": "qwen3:8b,deepseek-coder-v2:latest"
+  "models": "your-favorite-model:latest"
 }
 ```
 
