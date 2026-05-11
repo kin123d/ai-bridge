@@ -1,5 +1,6 @@
 # 🌉 ai-bridge
 
+[한국어 README](./README.ko.md)
 > **Your MacBook is the AI brain.**
 > **Your Linux server stays the workspace.**
 
@@ -104,12 +105,29 @@ Just type `./ai-bridge up`. The daemon handles the rest:
 - Handles MacBook Sleep/Wake cycles gracefully
 - Performs automatic healthchecks
 
-### 🛠️ VSCode Auto Setup
-No more manual configuration. ai-bridge provides templates to automatically inject:
-```json
-"ollama.baseUrl": "http://localhost:11434"
+### 🛠️ VSCode Auto Setup (`ai-bridge vscode init`)
+No more manual configuration. By running:
+```bash
+./ai-bridge vscode init
 ```
-into your remote workspace settings. Developers can start coding immediately without touching config files.
+ai-bridge automatically injects settings like `"ollama.baseUrl": "http://localhost:11434"` into your workspace's `.vscode/settings.json`. Developers can start coding immediately without touching config files.
+
+### 🩺 Health Diagnostics (`ai-bridge doctor`)
+Ensure your system meets the ai-bridge architecture requirements:
+```bash
+./ai-bridge doctor
+```
+Instantly verify Apple Silicon (MLX), Ollama status, and Reverse Tunnel connectivity.
+
+### 🤖 Official Agent Templates
+Find official, optimized prompts and configuration templates (`.clinerules`, `cline_mcp_settings.json`, etc.) for popular AI agents like Roo Code, Cline, and Continue.dev within the `templates/` directory.
+
+### 🌐 Distributed MCP Architecture
+Scale beyond a single server with the included `install/docker-compose/distributed-mcp.yml`:
+- **MacBook**: Pure Inference Engine
+- **Linux A**: Workspace / Runtime (VSCode Remote)
+- **Linux B**: MCP Gateway (Tools & Context Provider)
+- **Linux C**: Vector Memory (Qdrant)
 
 ### 🔒 Zero Trust & Maximum Security
 **Code never lives on the MacBook.**
@@ -130,8 +148,9 @@ This is just the beginning of the Remote AI-native development architecture.
 
 - [x] **v0.1** — Core Separation Layer (Mac Inference ↔ Linux Runtime)
 - [x] **v0.2** — Universal Support (MLX Native, Windows/Linux Docker-Compose)
-- [ ] **v0.3** — `ai-bridge` CLI tool refinement, Auto VSCode Config Injection
-- [ ] **v1.0** — Distributed MCP architecture, Shared Vector Memory
+- [ ] **v0.3** — `ai-bridge up` daemon completion & VSCode Auto Config Injection
+- [ ] **v0.4** — Official templates for Roo Code, Cline, and Continue
+- [ ] **v1.0** — Distributed MCP architecture & Shared Vector Memory
 
 ---
 

@@ -1,0 +1,21 @@
+{
+  "mcpServers": {
+    "ai-bridge-memory": {
+      "command": "docker",
+      "args": [
+        "exec",
+        "-i",
+        "mcp-gateway",
+        "node",
+        "/mcp-memory/build/index.js"
+      ]
+    },
+    "ai-bridge-tools": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-everything"
+      ]
+    }
+  }
+}

@@ -1,0 +1,12 @@
+# ai-bridge Roo Code Rules
+
+This environment uses the `ai-bridge` Compute Locality Separation architecture.
+Your inference engine (LLM) is running remotely on the user's MacBook, while the workspace (this codebase) is running on a Linux Server.
+
+## Important Constraints
+1. **Network Locality**: Do NOT attempt to run local LLMs or heavily resource-intensive inference engines on this server unless explicitly requested. The primary inference engine is accessible at `http://localhost:11434` via an SSH reverse tunnel.
+2. **Zero-Trust**: Do not move source code out of this workspace to the local machine.
+3. **Execution**: All shell commands are executed on the Linux Server.
+
+## Tools
+When utilizing MCP servers or configuring settings, rely on `http://localhost:11434` for Ollama/vLLM compatible endpoints.
