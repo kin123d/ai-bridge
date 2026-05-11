@@ -62,7 +62,7 @@ start_tunnel() {
 
   local ssh_opts=(
     -fN
-    -o "ServerAliveInterval=${SERVER_ALIVE_INTERVAL:-30}"
+    -o "ServerAliveInterval=${SERVER_ALIVE_INTERVAL:-15}"
     -o "ServerAliveCountMax=${SERVER_ALIVE_MAX:-3}"
     -o "ExitOnForwardFailure=yes"
     -o "StrictHostKeyChecking=accept-new"

@@ -30,7 +30,7 @@ run_autossh() {
   local ssh_key="${BRIDGE_SSH_KEY:-${HOME}/.ssh/ai-bridge}"
   ssh_key="${ssh_key/#\~/$HOME}"
 
-  local ssh_opts="-o ServerAliveInterval=${SERVER_ALIVE_INTERVAL:-30}"
+  local ssh_opts="-o ServerAliveInterval=${SERVER_ALIVE_INTERVAL:-15}"
   ssh_opts+=" -o ServerAliveCountMax=${SERVER_ALIVE_MAX:-3}"
   ssh_opts+=" -o ExitOnForwardFailure=yes"
   ssh_opts+=" -o StrictHostKeyChecking=accept-new"
@@ -65,7 +65,7 @@ run_bash_loop() {
 
       # 터널 프로세스가 살아있는지 감시
       while pgrep -f "ssh.*-R.*${OLLAMA_REMOTE_PORT:-11434}.*${BRIDGE_HOST}" > /dev/null 2>&1; do
-        sleep "${SERVER_ALIVE_INTERVAL:-30}"
+        sleep "${SERVER_ALIVE_INTERVAL:-15}"
       done
 
       log "WARN" "터널 프로세스 종료 감지"
