@@ -26,6 +26,16 @@ id_*
 *.swp
 *~
 
-# AI 세션 상태
-.ai/state/sessions/
-.ai/state/task-board.json
+# AI Agent Data
+.ai/*
+!.ai/rules.md
+
+# Python
+venv/
+.env/
+__pycache__/
+*.py[cod]
+
+# Node
+node_modules/
+npm-debug.log
