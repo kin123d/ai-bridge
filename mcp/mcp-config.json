@@ -1,0 +1,35 @@
+{
+  "// ai-bridge MCP 서버 기본 구성": "",
+  "// Ubuntu 서버에서 사용하는 MCP 서버 설정 예제": "",
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/home/dev/projects"]
+    },
+    "docker": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-docker"]
+    },
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "<your-token>"
+      }
+    },
+    "postgres": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-postgres"],
+      "env": {
+        "POSTGRES_CONNECTION_STRING": "postgresql://postgres:postgres@localhost:5432/your_db"
+      }
+    }
+  },
+  "// AI 추론 설정 (MacBook Ollama 터널)": "",
+  "ai": {
+    "provider": "ollama",
+    "baseUrl": "http://localhost:11434",
+    "model": "qwen3:8b",
+    "// 설명": "localhost:11434는 SSH 리버스 터널을 통해 MacBook Ollama로 연결됩니다"
+  }
+}
