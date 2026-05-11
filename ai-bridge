@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# ai-bridge CLI
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+BRIDGE_DIR="${SCRIPT_DIR}/bridge"
+
+case "$1" in
+    up)
+        echo "🚀 Starting ai-bridge daemon..."
+        nohup "${BRIDGE_DIR}/reconnect.sh" > /dev/null 2>&1 &
+        echo "✅ ai-bridge is up and running in the background."
+        echo "   Use './ai-bridge status' to check health."
+        ;;
+    status)
+        if [[ -x "${BRIDGE_DIR}/healthcheck.sh" ]]; then
+            "${BRIDGE_DIR}/healthcheck.sh"
+        else
+            echo "❌ Healthcheck script not found."
+        fi
+        ;;
+    stop)
+        echo "🛑 Stopping ai-bridge daemon..."
+        pkill -f "reconnect.sh" || true
+        pkill -f "ssh -N -R" || true
+        echo "✅ ai-bridge stopped."
+        ;;
+    *)
+        echo "Usage: ./ai-bridge {up|status|stop}"
+        exit 1
+        ;;
+esac

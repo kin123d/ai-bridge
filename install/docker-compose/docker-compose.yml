@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  # Ollama Service (NVIDIA GPU Passthrough)
+  ollama:
+    image: ollama/ollama:latest
+    container_name: shared_ollama
+    restart: unless-stopped
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    environment:
+      - OLLAMA_HOST=0.0.0.0
+      - OLLAMA_ORIGINS="*"
+
+  # vLLM Service (Optional, Uncomment to use)
+  # vllm:
+  #   image: vllm/vllm-openai:latest
+  #   container_name: shared_vllm
+  #   restart: unless-stopped
+  #   ports:
+  #     - "8000:8000"
+  #   volumes:
+  #     - huggingface_data:/root/.cache/huggingface
+  #   deploy:
+  #     resources:
+  #       reservations:
+  #         devices:
+  #           - driver: nvidia
+  #             count: all
+  #             capabilities: [gpu]
+  #   command: --model Qwen/Qwen2.5-Coder-7B-Instruct-AWQ --quantization awq --tensor-parallel-size 1 --max-model-len 8192
+
+volumes:
+  ollama_data:
+  huggingface_data:
