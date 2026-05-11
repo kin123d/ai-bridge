@@ -1,45 +1,86 @@
 #!/usr/bin/env bash
 # ai-bridge CLI
 
+set -euo pipefail
+
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BRIDGE_DIR="${SCRIPT_DIR}/bridge"
+SCRIPTS_DIR="${SCRIPT_DIR}/scripts"
 
-case "$1" in
+# Colors & Formatting
+BOLD="\033[1m"
+BLUE="\033[34m"
+GREEN="\033[32m"
+YELLOW="\033[33m"
+RED="\033[31m"
+CYAN="\033[36m"
+RESET="\033[0m"
+
+print_logo() {
+    echo -e "${CYAN}${BOLD}"
+    echo "    ___  ____       ____       _     __           "
+    echo "   /   |/  _/      / __ )_____(_)___/ /___ ____   "
+    echo "  / /| |/ / ______/ __  / ___/ / __  / __ \`/ _ \ "
+    echo " / ___ / / /_____/ /_/ / /  / / /_/ / /_/ /  __/  "
+    echo "/_/  |___/      /_____/_/  /_/\__,_/\__, /\___/   "
+    echo "                                   /____/         "
+    echo -e "${RESET}AI Compute Separation Layer for Mac & Linux\n"
+}
+
+case "${1:-help}" in
     up)
-        echo "🚀 Starting ai-bridge daemon..."
+        print_logo
+        echo -e "${BLUE}▶ Starting ai-bridge daemon...${RESET}"
         nohup "${BRIDGE_DIR}/reconnect.sh" > /dev/null 2>&1 &
-        echo "✅ ai-bridge is up and running in the background."
-        echo "   Use './ai-bridge status' to check health."
+        echo -e "${GREEN}✔ ai-bridge is up and running in the background.${RESET}"
+        echo -e "  Run ${BOLD}./ai-bridge status${RESET} to check health."
         ;;
     status)
         if [[ -x "${BRIDGE_DIR}/healthcheck.sh" ]]; then
             "${BRIDGE_DIR}/healthcheck.sh"
         else
-            echo "❌ Healthcheck script not found."
+            echo -e "${RED}✖ Healthcheck script not found.${RESET}"
         fi
         ;;
-    stop)
-        echo "🛑 Stopping ai-bridge daemon..."
+    down|stop)
+        echo -e "${YELLOW}▶ Stopping ai-bridge daemon...${RESET}"
         pkill -f "reconnect.sh" || true
         pkill -f "ssh -N -R" || true
-        echo "✅ ai-bridge stopped."
+        echo -e "${GREEN}✔ ai-bridge stopped.${RESET}"
+        ;;
+    init)
+        if [[ -x "${SCRIPTS_DIR}/agent-init.sh" ]]; then
+            "${SCRIPTS_DIR}/agent-init.sh" "${2:-}"
+        else
+            echo -e "${RED}✖ agent-init script not found.${RESET}"
+            echo -e "  Make sure 'scripts/agent-init.sh' exists and is executable."
+        fi
         ;;
     vscode)
-        if [[ -x "${SCRIPT_DIR}/scripts/vscode-init.sh" ]]; then
-            "${SCRIPT_DIR}/scripts/vscode-init.sh" "$2"
+        if [[ -x "${SCRIPTS_DIR}/vscode-init.sh" ]]; then
+            "${SCRIPTS_DIR}/vscode-init.sh" "${2:-}"
         else
-            echo "❌ vscode-init script not found."
+            echo -e "${RED}✖ vscode-init script not found.${RESET}"
         fi
         ;;
     doctor)
-        if [[ -x "${SCRIPT_DIR}/scripts/doctor.sh" ]]; then
-            "${SCRIPT_DIR}/scripts/doctor.sh"
+        if [[ -x "${SCRIPTS_DIR}/doctor.sh" ]]; then
+            "${SCRIPTS_DIR}/doctor.sh"
         else
-            echo "❌ doctor script not found."
+            echo -e "${RED}✖ doctor script not found.${RESET}"
         fi
         ;;
-    *)
-        echo "Usage: ./ai-bridge {up|status|stop|vscode|doctor}"
+    help|*)
+        print_logo
+        echo -e "Usage: ${BOLD}ai-bridge <command>${RESET}\n"
+        echo -e "Commands:"
+        echo -e "  ${GREEN}up${RESET}       Start the ai-bridge daemon (background)"
+        echo -e "  ${YELLOW}down${RESET}     Stop the ai-bridge daemon (alias: stop)"
+        echo -e "  ${CYAN}status${RESET}   Check the connection status and health"
+        echo -e "  ${CYAN}init${RESET}     Initialize AI agent presets (roo, cline, continue)"
+        echo -e "  ${CYAN}vscode${RESET}   Configure VSCode Remote-SSH for current directory"
+        echo -e "  ${CYAN}doctor${RESET}   Check system readiness and dependencies"
+        echo ""
         exit 1
         ;;
 esac

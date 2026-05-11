@@ -36,7 +36,7 @@ else
   warn "GatewayPorts 설정이 없습니다."
   echo ""
   echo "  리버스 터널이 localhost에만 바인드되도록 (ai-bridge 기본 동작)"
-  echo "  외부 접귻c이 필요하면 /etc/ssh/sshd_config에 다음을 추가하세요:"
+  echo "  외부 접근이 필요하면 /etc/ssh/sshd_config에 다음을 추가하세요:"
   echo "    GatewayPorts clientspecified"
   echo ""
 fi

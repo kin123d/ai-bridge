@@ -63,7 +63,9 @@ By separating the **Brain** and the **Hands**, you get the best of both worlds: 
 
 ## 🚀 5-Minute Quick Start
 
-Experience the "Aha!" moment in under 5 minutes.
+> [!NOTE]
+> 📺 **[15-second Demo GIF placeholder here (Showing Mac GPU powering Roo Code on remote Ubuntu)]**
+> See [`docs/demo-scenario.md`](docs/demo-scenario.md) for the detailed storyboard.
 
 ### 1. The Brain (MacBook)
 ```bash
@@ -101,8 +103,8 @@ curl http://localhost:11434/api/tags
 ### 🔄 Auto Reverse Tunnel Daemon (`ai-bridge up`)
 Just type `./ai-bridge up`. The daemon handles the rest:
 - Creates a secure reverse SSH tunnel
-- Auto-reconnects if the connection drops
-- Handles MacBook Sleep/Wake cycles gracefully
+- **Ultra-fast 15-second drop detection** with exponential backoff auto-reconnection
+- Handles MacBook Sleep/Wake cycles and Wi-Fi changes gracefully
 - Performs automatic healthchecks
 
 ### 🛠️ VSCode Auto Setup (`ai-bridge vscode init`)
@@ -119,8 +121,12 @@ Ensure your system meets the ai-bridge architecture requirements:
 ```
 Instantly verify Apple Silicon (MLX), Ollama status, and Reverse Tunnel connectivity.
 
-### 🤖 Official Agent Templates
-Find official, optimized prompts and configuration templates (`.clinerules`, `cline_mcp_settings.json`, etc.) for popular AI agents like Roo Code, Cline, and Continue.dev within the `templates/` directory.
+### 🤖 Official Agent Templates (`ai-bridge init`)
+Setup your AI agents perfectly in a new project with a single command:
+```bash
+ai-bridge init roo
+```
+Instantly injects official, optimized prompts and configuration templates (`.roo/`, `.cline/`, etc.) for popular AI agents like Roo Code, Cline, and Continue.dev right into your workspace.
 
 ### 🌐 Distributed MCP Architecture
 Scale beyond a single server with the included `install/docker-compose/distributed-mcp.yml`:
@@ -146,11 +152,11 @@ Check out `install/docker-compose/` for our unified vLLM/Ollama GPU configuratio
 
 This is just the beginning of the Remote AI-native development architecture.
 
-- [x] **v0.1** — Core Separation Layer (Mac Inference ↔ Linux Runtime)
-- [x] **v0.2** — Universal Support (MLX Native, Windows/Linux Docker-Compose)
-- [ ] **v0.3** — `ai-bridge up` daemon completion & VSCode Auto Config Injection
-- [ ] **v0.4** — Official templates for Roo Code, Cline, and Continue
-- [ ] **v1.0** — Distributed MCP architecture & Shared Vector Memory
+- v0.1 — Core Separation Layer (Mac Inference ↔ Linux Runtime)
+- v0.2 — Universal Support (MLX Native, Windows/Linux Docker-Compose)
+- v0.3 — ai-bridge up daemon completion & VSCode Auto Config Injection
+- v0.4 — Official templates for Roo Code, Cline, and Continue
+- v1.0 — Distributed MCP architecture & Shared Vector Memory
 
 ---
 

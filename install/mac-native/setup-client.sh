@@ -73,17 +73,28 @@ else
   info "✅ SSH 키 이미 존재: ${SSH_KEY}"
 fi
 
+# --- 기존 설정 로드 ---
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+BRIDGE_DIR="$(dirname "${SCRIPT_DIR}")/bridge"
+CONF_FILE="${BRIDGE_DIR}/bridge.conf"
+
+if [[ -f "${CONF_FILE}" ]]; then
+  info "기존 설정을 발견했습니다. (${CONF_FILE})"
+  # shellcheck source=/dev/null
+  source "${CONF_FILE}"
+fi
+
 # --- 서버 정보 입력 ---
 echo ""
 echo "📡 원격 Ubuntu 서버 정보를 입력하세요:"
-read -rp "  서버 주소 (IP 또는 hostname): " BRIDGE_HOST
-read -rp "  SSH 포트 [22]: " BRIDGE_PORT
-BRIDGE_PORT="${BRIDGE_PORT:-22}"
-read -rp "  사용자명: " BRIDGE_USER
+read -rp "  서버 주소 (IP 또는 hostname) [${BRIDGE_HOST:-}]: " INPUT_HOST
+BRIDGE_HOST="${INPUT_HOST:-${BRIDGE_HOST:-}}"
+read -rp "  SSH 포트 [${BRIDGE_PORT:-22}]: " INPUT_PORT
+BRIDGE_PORT="${INPUT_PORT:-${BRIDGE_PORT:-22}}"
+read -rp "  사용자명 [${BRIDGE_USER:-}]: " INPUT_USER
+BRIDGE_USER="${INPUT_USER:-${BRIDGE_USER:-}}"
 
 # --- bridge.conf 생성 ---
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-BRIDGE_DIR="$(dirname "${SCRIPT_DIR}")/bridge"
 
 if [[ "${BACKEND_CHOICE}" == "2" ]]; then
   LOCAL_PORT="8080"

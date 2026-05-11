@@ -8,10 +8,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **Global CLI Installer (`install/global.sh`)**: Easily symlink the `ai-bridge` command globally (e.g., `/usr/local/bin`).
+- **Agent Initialization (`ai-bridge init [agent]`)**: Auto-inject AI agent configuration templates (Roo, Cline, Continue) into the current workspace.
+- **Benchmark & Demo Docs**: Added `docs/benchmark.md` and `docs/demo-scenario.md` to prove zero-latency concepts and demonstrate "Aha!" moments.
 - **VSCode Auto Setup (`ai-bridge vscode init`)**: Automatically injects `"ollama.baseUrl"` into `.vscode/settings.json`.
 - **Health Diagnostics (`ai-bridge doctor`)**: Instantly verifies Apple Silicon (MLX), Ollama status, and Reverse Tunnel connectivity.
-- **Official Agent Templates**: Included `.clinerules` for Roo Code, `cline_mcp_settings.json` for Cline, and `config.json` for Continue.dev to explicitly leverage `localhost:11434`.
 - **Distributed MCP Architecture**: Added `install/docker-compose/distributed-mcp.yml` to define isolated containers for Vector Memory (Qdrant), MCP Gateway, and Workspace.
+
+### Changed
+- **Operational UX Enhancement**: Upgraded `ai-bridge` core script into a stylish CLI with ANSI colors, ASCII logos, and robust command aliases (e.g., `down` for `stop`).
+- **Ultra-Fast Reconnect**: Optimized `bridge/tunnel.sh` and `bridge/reconnect.sh` with a 15-second `ServerAliveInterval` and exponential backoff to instantly recover from sleep/network drops.
+- **Smart Setup Prompts**: Modified `install/mac-native/setup-client.sh` to automatically read existing `bridge.conf` values and use them as defaults, preventing the need to re-enter IP/Port/User credentials on subsequent runs.
+- Fixed a minor typo in `install/mac-native/setup-server.sh`.
 - **Korean README**: Added `README.ko.md` for Korean developers.
 
 ## [0.2.0] - 2026-05-11

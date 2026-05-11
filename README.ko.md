@@ -64,7 +64,9 @@ Linux    = 워크스페이스 (코드, 실행, MCP 역할)
 
 ## 🚀 5분 퀵스타트
 
-단 5분 안에 "아하!" 하는 순간을 경험해 보세요.
+> [!NOTE]
+> 📺 **[이 자리에 15초 시연 GIF 삽입 예정 (Mac GPU가 원격 Ubuntu에서 Roo Code를 구동하는 장면)]**
+> 자세한 시연 시나리오는 [`docs/demo-scenario.md`](docs/demo-scenario.md)를 참고하세요.
 
 ### 1. 두뇌 환경 (MacBook)
 ```bash
@@ -102,8 +104,8 @@ curl http://localhost:11434/api/tags
 ### 🔄 자동 리버스 터널 데몬 (`ai-bridge up`)
 단순히 `./ai-bridge up`을 입력하세요. 데몬이 나머지를 모두 처리합니다:
 - 안전한 리버스 SSH 터널 생성
-- 연결이 끊어질 경우 자동 재연결
-- MacBook의 잠자기/깨우기(Sleep/Wake) 주기에 우아하게 대응
+- **15초 단위의 초고속 단절 감지** 및 지수 백오프 기반 자동 재연결
+- MacBook의 잠자기/깨우기(Sleep/Wake) 주기 및 Wi-Fi 변경에 우아하게 대응
 - 자동 상태 체크(Healthcheck) 수행
 
 ### 🛠️ VSCode 자동 설정 (`ai-bridge vscode init`)
@@ -120,8 +122,12 @@ curl http://localhost:11434/api/tags
 ```
 Apple Silicon (MLX), Ollama 구동 상태, 리버스 터널(Bridge) 활성화 여부를 즉시 진단합니다.
 
-### 🤖 공식 에이전트 템플릿 지원
-`templates/` 디렉토리 하위에 Roo Code, Cline, Continue.dev 등 인기 있는 AI 에이전트들을 위한 공식 프롬프트와 연결 설정 템플릿(`.clinerules`, `cline_mcp_settings.json` 등)을 제공합니다.
+### 🤖 공식 에이전트 템플릿 지원 (`ai-bridge init`)
+터미널에서 명령어 한 줄로 새 프로젝트에 AI 에이전트를 완벽히 세팅하세요.
+```bash
+ai-bridge init roo
+```
+Roo Code, Cline, Continue.dev 등 인기 있는 AI 에이전트들을 위한 공식 프롬프트와 연결 설정(`.roo/`, `.cline/` 등)이 현재 워크스페이스로 즉시 주입됩니다.
 
 ### 🌐 분산 MCP 아키텍처 (Distributed MCP)
 단순한 1:1 연결을 넘어, `install/docker-compose/distributed-mcp.yml`을 통해 역할을 분리합니다:
@@ -147,11 +153,11 @@ Mac을 사용하지 않으시나요? 표준 NVIDIA 환경도 지원합니다.
 
 이것은 원격 AI 네이티브 개발 아키텍처를 향한 시작에 불과합니다. 향후 다음 단계로 진화합니다.
 
-- [x] **v0.1** — 핵심 분리 레이어 (Mac 추론 ↔ Linux 런타임)
-- [x] **v0.2** — 유니버셜 지원 (MLX Native, Windows/Linux Docker-Compose)
-- [ ] **v0.3** — `ai-bridge up` 데몬 완성 및 VSCode 원격 자동 설정(Auto Config Injection) 도입
-- [ ] **v0.4** — Roo Code, Cline, Continue 등 공식 템플릿 지원
-- [ ] **v1.0** — 분산 MCP 아키텍처 (런타임/도구/벡터 메모리 분리) 도입
+- v0.1 — 핵심 분리 레이어 (Mac 추론 ↔ Linux 런타임)
+- v0.2 — 유니버셜 지원 (MLX Native, Windows/Linux Docker-Compose)
+- v0.3 — ai-bridge up 데몬 완성 및 VSCode 원격 자동 설정(Auto Config Injection) 도입
+- v0.4 — Roo Code, Cline, Continue 등 공식 템플릿 지원
+- v1.0 — 분산 MCP 아키텍처 (런타임/도구/벡터 메모리 분리) 도입
 
 ---
 
