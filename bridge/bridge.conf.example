@@ -1,0 +1,28 @@
+# ai-bridge 설정 파일
+# 이 파일을 bridge.conf로 복사한 후 실제 값을 입력하세요.
+# cp bridge.conf.example bridge.conf
+
+# === 원격 서버 설정 ===
+BRIDGE_HOST="dev-server.example.com"
+BRIDGE_USER="dev"
+BRIDGE_PORT="22"
+BRIDGE_SSH_KEY="~/.ssh/ai-bridge"
+
+# === Ollama 설정 ===
+OLLAMA_LOCAL_PORT="11434"
+OLLAMA_REMOTE_PORT="11434"
+
+# === 재연결 설정 ===
+RECONNECT_INTERVAL="5"       # 초 단위 기본 재연결 대기
+RECONNECT_MAX_INTERVAL="300" # 최대 백오프 간격 (5분)
+SERVER_ALIVE_INTERVAL="30"   # SSH keepalive 간격
+SERVER_ALIVE_MAX="3"         # keepalive 실패 허용 횟수
+
+# === 로그 설정 ===
+LOG_DIR="${HOME}/.ai-bridge/logs"
+LOG_LEVEL="INFO"             # DEBUG, INFO, WARN, ERROR
+
+# === 추가 포트 포워딩 (선택) ===
+# 콤마로 구분. 형식: local_port:remote_port
+# EXTRA_FORWARDS="3190:3190,8080:8080"
+EXTRA_FORWARDS=""

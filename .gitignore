@@ -1,0 +1,31 @@
+# ai-bridge
+
+# 사용자별 설정 (비밀 정보 포함)
+bridge/bridge.conf
+!bridge/bridge.conf.example
+
+# 로그
+logs/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# SSH 키 (절대 커밋 금지)
+*.pem
+id_*
+*.key
+
+# 임시 파일
+*.tmp
+*.swp
+*~
+
+# AI 세션 상태
+.ai/state/sessions/
+.ai/state/task-board.json
